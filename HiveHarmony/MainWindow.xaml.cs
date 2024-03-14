@@ -20,4 +20,24 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
     }
+
+    protected override void OnMouseDown(MouseButtonEventArgs e)
+    {
+        if (e.LeftButton == MouseButtonState.Pressed && e.GetPosition(this).Y < 30)
+            DragMove();
+    }
+
+    private void CommandBindingCanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = true;
+
+    private void CloseWindow(object sender, ExecutedRoutedEventArgs e) => SystemCommands.CloseWindow(this);
+
+    private void MaximizeAndRestoreWindow(object sender, ExecutedRoutedEventArgs e)
+    {
+        if (WindowState == WindowState.Maximized)
+            SystemCommands.RestoreWindow(this);
+        else
+            SystemCommands.MaximizeWindow(this);
+    }
+
+    private void MinimizeWindow(object sender, ExecutedRoutedEventArgs e) => SystemCommands.MinimizeWindow(this);
 }

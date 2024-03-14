@@ -5,8 +5,85 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HiveHarmony"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Height="800" Width="1280" MinHeight="100" MinWidth="400"
+        WindowStyle="None"
+        ResizeMode="CanResizeWithGrip"
+        Background="Transparent"
+        AllowsTransparency="True">
 
-    </Grid>
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static SystemCommands.CloseWindowCommand}" CanExecute="CommandBindingCanExecute" Executed="CloseWindow" />
+        <CommandBinding Command="{x:Static SystemCommands.MaximizeWindowCommand}" CanExecute="CommandBindingCanExecute" Executed="MaximizeAndRestoreWindow" />
+        <CommandBinding Command="{x:Static SystemCommands.MinimizeWindowCommand}" CanExecute="CommandBindingCanExecute" Executed="MinimizeWindow" />
+    </Window.CommandBindings>
+
+    <Border Background="#121212">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300px"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50px"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Column="1" Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="135px"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Row="0"
+                        Grid.Column="1"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Top">
+
+                    <StackPanel.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="FontSize" Value="15"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#4d4d4d"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Resources>
+
+                    <Button Content="&#x2013;"
+                    Width="45"
+                    Height="30"
+                    Command="{x:Static SystemCommands.MinimizeWindowCommand}"
+                    BorderThickness="0"/>
+
+                    <Button Content="&#x25FB;"
+                    Width="45"
+                    Height="30" 
+                    Command="{x:Static SystemCommands.MaximizeWindowCommand}"
+                    BorderThickness="0"/>
+
+                    <Button Content="&#x2715;"
+                    FontSize="13"
+                    Width="45"
+                    Height="30"
+                    Command="{x:Static SystemCommands.CloseWindowCommand}"
+                    BorderThickness="0"
+                    x:Name="CloseBtn"/>
+
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
 </Window>
