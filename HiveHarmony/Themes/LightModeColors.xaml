@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="color_Back_Primary_Low">#F0F0FF</Color>
+    <Color x:Key="color_Back_Primary_LowMid">#DFDFEF</Color>
+    <Color x:Key="color_Back_Primary_Mid">#C6C6CF</Color>
+    <Color x:Key="color_Back_Primary_HighMid">#AEAEBF</Color>
+    <Color x:Key="color_Back_Primary_High">#F6AAB7</Color>
+
+
+    <Color x:Key="Color_Text_Low">Black</Color>
+    <Color x:Key="Color_Text_Mid">Gray</Color>
+    <Color x:Key="Color_Text_High">LightGray</Color>
+
+
+    <SolidColorBrush x:Key="scb_Back_Primary_Low" Color="{StaticResource color_Back_Primary_Low}" />
+    <SolidColorBrush x:Key="scb_Back_Primary_LowMid" Color="{StaticResource color_Back_Primary_LowMid}" />
+    <SolidColorBrush x:Key="scb_Back_Primary_Mid" Color="{StaticResource color_Back_Primary_Mid}" />
+    <SolidColorBrush x:Key="scb_Back_Primary_HighMid" Color="{StaticResource color_Back_Primary_HighMid}" />
+    <SolidColorBrush x:Key="scb_Back_Primary_High" Color="{StaticResource color_Back_Primary_High}" />
+
+
+    <SolidColorBrush x:Key="scb_Text_Low" Color="{DynamicResource Color_Text_Low}" />
+    <SolidColorBrush x:Key="scb_Text_Mid" Color="{DynamicResource Color_Text_Mid}" />
+    <SolidColorBrush x:Key="scb_Text_High" Color="{DynamicResource Color_Text_High}" />
+
+</ResourceDictionary>
