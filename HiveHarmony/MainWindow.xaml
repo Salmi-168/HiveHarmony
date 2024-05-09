@@ -36,7 +36,7 @@
     <Border Background="{DynamicResource scb_Back_Primary_HighMid}">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="250" />
+                <ColumnDefinition Width="150" />
                 <ColumnDefinition />
                 <ColumnDefinition Width="400" />
             </Grid.ColumnDefinitions>
@@ -200,11 +200,11 @@
                 <Button Grid.Row="0" Style="{DynamicResource HexButtonTheme}">
                     <Path
                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                        Margin="75"
+                        Margin="25"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Fill="{DynamicResource scb_Text_Low}"
-                        Stretch="UniformToFill">
+                        Stretch="Uniform">
                         <Path.Data>
                             <PathGeometry Figures="M27 31h-22c-1.104 0-2-0.896-2-2v-22c0-1.105 0.896-2 2-2h2v1c0 1.657 1.343 3 3 3s3-1.343 3-3v-1h6v1c0 1.657 1.344 3 3 3s3-1.343 3-3v-1h2c1.104 0 2 0.895 2 2v22c0 1.104-0.896 2-2 2zM27 12h-22v17h22v-17zM10 17h-3v-3h3v3zM10 22h-3v-3h3v3zM10 27h-3v-3h3v3zM15 17h-3v-3h3v3zM15 22h-3v-3h3v3zM15 27h-3v-3h3v3zM20 17h-3v-3h3v3zM20 22h-3v-3h3v3zM20 27h-3v-3h3v3zM25 17h-3v-3h3v3zM25 22h-3v-3h3v3zM25 27h-3v-3h3v3zM21.969 8c-1.088 0-1.969-0.882-1.969-1.969v-2.062c0-1.088 0.881-1.969 1.969-1.969s1.969 0.881 1.969 1.969v2.062c0 1.087-0.881 1.969-1.969 1.969zM9.969 8c-1.088 0-1.969-0.882-1.969-1.969v-2.062c0-1.088 0.881-1.969 1.969-1.969s1.969 0.881 1.969 1.969v2.062c0 1.087-0.882 1.969-1.969 1.969z" FillRule="evenodd" />
                         </Path.Data>
@@ -213,20 +213,41 @@
                 <Button Grid.Row="1" Style="{DynamicResource HexButtonTheme}">
                     <Path
                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                        Margin="75"
+                        Margin="25"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Fill="{DynamicResource scb_Text_Low}"
-                        Stretch="UniformToFill" />
+                        Stretch="Uniform"
+                        Stroke="{DynamicResource scb_Text_Low}"
+                        StrokeThickness="4">
+                        <Path.Data>
+                            <GeometryGroup>
+                                <EllipseGeometry
+                                    Center="31.89, 22.71"
+                                    RadiusX="5.57"
+                                    RadiusY="5.57" />
+                                <EllipseGeometry
+                                    Center="48.46, 22.71"
+                                    RadiusX="5.57"
+                                    RadiusY="5.57" />
+                                <EllipseGeometry
+                                    Center="15.54, 22.71"
+                                    RadiusX="5.57"
+                                    RadiusY="5.57" />
+                                <PathGeometry Figures="M43.16,43.74A11.28,11.28,0,0,0,31.89,32.47h0A11.27,11.27,0,0,0,20.62,43.74Z" />
+                                <PathGeometry Figures="M46.87,43.74H59.73A11.27,11.27,0,0,0,48.46,32.47h0a11.24,11.24,0,0,0-5.29,1.32" />
+                                <PathGeometry Figures="M17.13,43.74H4.27A11.27,11.27,0,0,1,15.54,32.47h0a11.24,11.24,0,0,1,5.29,1.32" />
+                            </GeometryGroup>
+                        </Path.Data>
+                    </Path>
                 </Button>
                 <Button Grid.Row="2" Style="{DynamicResource HexButtonTheme}">
                     <Path
                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                        Margin="75"
+                        Margin="25"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Fill="{DynamicResource scb_Text_Low}"
-                        Stretch="UniformToFill">
+                        Stretch="Uniform">
                         <Path.Data>
                             <PathGeometry Figures="M6.7121,5.95612a.75994.75994,0,0,1-.22437.47662.78669.78669,0,0,1-.90838.1391.76185.76185,0,0,1-.191-1.22382.78142.78142,0,0,1,.90765-.1391A.7669.7669,0,0,1,6.7121,5.95612ZM14,11.60992l-.441,1.08765-.61957-.24554a2.27586,2.27586,0,0,1-.23278.26837,2.38588,2.38588,0,0,1-.2298.19958l.26282.6059-1.09021.46069-.26252-.60626a2.35313,2.35313,0,0,1-.66205.00793L10.47675,14l-1.09937-.435.24817-.61242a2.27273,2.27273,0,0,1-.25586-.21442,2.35826,2.35826,0,0,1-.21777-.24268l-.61438.25934L8.072,11.67841l.61365-.25934a2.28668,2.28668,0,0,1-.00806-.65412L8.058,10.51941,8.49829,9.4325l.61951.2456a2.3808,2.3808,0,0,1,.23468-.26947,2.46315,2.46315,0,0,1,.22833-.19885l-.26245-.60559,1.08984-.46106.26252.60632a2.42161,2.42161,0,0,1,.662-.008l.2486-.61207,1.09973.436-.24817.61176a2.35126,2.35126,0,0,1,.47327.45739l.61365-.25927.46667,1.076-.61365.26007a2.33868,2.33868,0,0,1,.00843.65375Zm-1.93372-1.59106a1.49493,1.49493,0,0,0-2.08551.01123,1.4543,1.4543,0,0,0,.011,2.08112,1.47881,1.47881,0,0,0,.48572.31256,1.49547,1.49547,0,0,0,1.60016-.32416,1.45366,1.45366,0,0,0-.01136-2.08075ZM9.03552,8.3313l-1.18847.9895-.56421-.661a3.10358,3.10358,0,0,1-.827.25934L6.381,9.7804l-1.5473-.13.074-.862a3.0747,3.0747,0,0,1-.77057-.3941l-.67011.55706L2.46594,7.77679l.66937-.55706a3.01511,3.01511,0,0,1-.26318-.81708L2,6.32843l.132-1.52911.87213.07348a3.08056,3.08056,0,0,1,.39923-.76165l-.56348-.661L4.028,2.46033l.56458.66131a3.15867,3.15867,0,0,1,.827-.26L5.494,2l1.5484.1311-.07477.86127a3.04649,3.04649,0,0,1,.40216.172,3.111,3.111,0,0,1,.36914.22278l.669-.55744L9.40979,4.00427l-.66937.55707a3.06071,3.06071,0,0,1,.26355.81744l.871.07319L9.74268,6.98218l-.87177-.07392a3.02564,3.02564,0,0,1-.39923.76166ZM7.87378,6.05353a1.91612,1.91612,0,0,0-1.04-1.86707,1.96538,1.96538,0,0,0-2.27063.34772A1.90691,1.90691,0,0,0,5.04193,7.5946a1.965,1.965,0,0,0,2.27026-.34735A1.90267,1.90267,0,0,0,7.87378,6.05353Zm3.3761,4.46771a.59907.59907,0,0,0-.64044.13.591.591,0,0,0-.13086.19592.58392.58392,0,0,0,.33032.761.59709.59709,0,0,0,.63965-.12933.59048.59048,0,0,0,.13092-.19592.58277.58277,0,0,0-.13568-.63672A.59628.59628,0,0,0,11.24988,10.52124Z" FillRule="evenodd" />
                         </Path.Data>
@@ -252,7 +273,7 @@
                 <Border
                     Margin="10"
                     Background="{DynamicResource scb_Back_Primary_LowMid}"
-                    CornerRadius="20">
+                    CornerRadius="{StaticResource CornerRadius_Medium}">
                     <Border.Effect>
                         <DropShadowEffect />
                     </Border.Effect>
@@ -262,7 +283,7 @@
                             Margin="10"
                             VerticalAlignment="Top"
                             Background="{DynamicResource scb_Back_Primary_High}"
-                            CornerRadius="10">
+                            CornerRadius="{StaticResource CornerRadius_Medium}">
                             <TextBlock
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
@@ -279,11 +300,12 @@
                                 Margin="10,5"
                                 Padding="10,20"
                                 Background="{DynamicResource scb_Back_Primary_HighMid}"
-                                CornerRadius="10">
+                                CornerRadius="{StaticResource CornerRadius_Medium}">
                                 <Grid>
                                     <CheckBox
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Center"
+                                        FontFamily="{DynamicResource FlowCircularRegular}"
                                         FontSize="20"
                                         FontWeight="Bold"
                                         IsChecked="True"
@@ -307,54 +329,6 @@
                                     </WrapPanel>
                                 </Grid>
                             </Border>
-
-                            <Border
-                                Margin="10,5"
-                                Padding="10,20"
-                                Background="{DynamicResource scb_Back_Primary_HighMid}"
-                                CornerRadius="10">
-                                <Grid>
-                                    <CheckBox
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Center"
-                                        FontSize="20"
-                                        FontWeight="Bold"
-                                        IsChecked="False"
-                                        Style="{DynamicResource CheckBoxTheme}">
-                                        Sushi
-                                    </CheckBox>
-                                    <WrapPanel
-                                        Margin="100,0,0,0"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Center">
-                                        <Image
-                                            Width="25"
-                                            Height="25"
-                                            Margin="1"
-                                            Source="https://api.suhri.de/user/picture/3/128.png" />
-                                        <Image
-                                            Width="25"
-                                            Height="25"
-                                            Margin="1"
-                                            Source="https://api.suhri.de/user/picture/1/128.png" />
-                                        <Image
-                                            Width="25"
-                                            Height="25"
-                                            Margin="1"
-                                            Source="https://api.suhri.de/user/picture/59/128.png" />
-                                        <Image
-                                            Width="25"
-                                            Height="25"
-                                            Margin="1"
-                                            Source="https://api.suhri.de/user/picture/16/128.png" />
-                                        <Image
-                                            Width="25"
-                                            Height="25"
-                                            Margin="1"
-                                            Source="https://api.suhri.de/user/picture/44/128.png" />
-                                    </WrapPanel>
-                                </Grid>
-                            </Border>
                         </StackPanel>
                     </Grid>
                 </Border>
@@ -365,7 +339,7 @@
                     Grid.Row="1"
                     Margin="10"
                     Background="{DynamicResource scb_Back_Primary_LowMid}"
-                    CornerRadius="20">
+                    CornerRadius="{StaticResource CornerRadius_Medium}">
                     <Border.Effect>
                         <DropShadowEffect />
                     </Border.Effect>
@@ -375,7 +349,7 @@
                             Margin="10"
                             VerticalAlignment="Top"
                             Background="{DynamicResource scb_Back_Primary_High}"
-                            CornerRadius="10">
+                            CornerRadius="{StaticResource CornerRadius_Medium}">
                             <TextBlock
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
@@ -392,12 +366,16 @@
                             Margin="10,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
+                            FontFamily="{DynamicResource FlowCircularRegular}"
                             FontSize="25"
                             FontWeight="Bold"
                             Foreground="{DynamicResource scb_Text_Low}"
                             TextAlignment="Left">
-                            - Müll raus<LineBreak />
-                            - Einkaufen</TextBlock>
+                            Todolistthings<LineBreak />
+                            someplaceholderbla<LineBreak />
+                            some more text<LineBreak />
+                            andsomemore<LineBreak />
+                        </TextBlock>
                     </StackPanel>
                 </Border>
 
@@ -407,7 +385,7 @@
                     Grid.Column="1"
                     Margin="10"
                     Background="{DynamicResource scb_Back_Primary_LowMid}"
-                    CornerRadius="20">
+                    CornerRadius="{StaticResource CornerRadius_Medium}">
                     <Border.Effect>
                         <DropShadowEffect />
                     </Border.Effect>
@@ -418,7 +396,7 @@
                             Margin="10"
                             VerticalAlignment="Top"
                             Background="{DynamicResource scb_Back_Primary_High}"
-                            CornerRadius="10">
+                            CornerRadius="{StaticResource CornerRadius_Medium}">
                             <TextBlock
                                 Name="WeekdayHeaderTextblock"
                                 Margin="5"
@@ -438,7 +416,7 @@
                                 Margin="0,0,0,5"
                                 Padding="5"
                                 Background="LightBlue"
-                                CornerRadius="5">
+                                CornerRadius="{StaticResource CornerRadius_Medium}">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="100" />
@@ -452,6 +430,7 @@
                                     <TextBlock
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
+                                        FontFamily="{DynamicResource FlowCircularRegular}"
                                         FontSize="20"
                                         FontWeight="Bold"
                                         Foreground="{DynamicResource scb_Text_Low}"
@@ -462,15 +441,16 @@
                                         Grid.Row="1"
                                         Padding="5"
                                         Background="LightSkyBlue"
-                                        CornerRadius="10">
+                                        CornerRadius="{StaticResource CornerRadius_Medium}">
                                         <TextBlock
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Center"
+                                            FontFamily="{DynamicResource FlowCircularRegular}"
                                             FontSize="20"
                                             FontWeight="Bold"
                                             Foreground="{DynamicResource scb_Text_Low}"
                                             TextAlignment="Center">
-                                            19 - 23
+                                            19---23
                                         </TextBlock>
                                     </Border>
 
@@ -488,93 +468,6 @@
                                                 Width="40"
                                                 Height="40"
                                                 Source="https://api.suhri.de/user/picture/44/128.png" />
-                                            <Path
-                                                Height="25"
-                                                Margin="0,0,0,-10"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Bottom"
-                                                Data="F1 M 1 4 L 3 6 L 9 0 L 10 1 L 3 8 L 0 5 Z"
-                                                Fill="LawnGreen"
-                                                Stretch="UniformToFill" />
-                                        </Grid>
-                                    </StackPanel>
-
-                                </Grid>
-                            </Border>
-
-                            <Border
-                                Margin="0,0,0,5"
-                                Padding="5"
-                                Background="LightPink"
-                                CornerRadius="5">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="100" />
-                                        <ColumnDefinition />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="40" />
-                                        <RowDefinition Height="40" />
-                                    </Grid.RowDefinitions>
-
-                                    <TextBlock
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        FontSize="20"
-                                        FontWeight="Bold"
-                                        Foreground="{DynamicResource scb_Text_Low}"
-                                        TextAlignment="Center">
-                                        Zocken
-                                    </TextBlock>
-                                    <Border
-                                        Grid.Row="1"
-                                        Padding="5"
-                                        Background="LightSalmon"
-                                        CornerRadius="10">
-                                        <TextBlock
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            FontSize="20"
-                                            FontWeight="Bold"
-                                            Foreground="{DynamicResource scb_Text_Low}"
-                                            TextAlignment="Center">
-                                            16 - 18
-                                        </TextBlock>
-                                    </Border>
-
-                                    <StackPanel
-                                        Grid.RowSpan="2"
-                                        Grid.Column="1"
-                                        Margin="10"
-                                        Orientation="Horizontal">
-
-                                        <Grid
-                                            Margin="2,0"
-                                            HorizontalAlignment="Left"
-                                            VerticalAlignment="Center">
-                                            <Image
-                                                Width="40"
-                                                Height="40"
-                                                Source="https://api.suhri.de/user/picture/44/128.png" />
-                                            <Path
-                                                Height="25"
-                                                Margin="0,0,0,-10"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Bottom"
-                                                Data="F1 M 1 4 L 3 6 L 9 0 L 10 1 L 3 8 L 0 5 Z"
-                                                Fill="LawnGreen"
-                                                Stretch="UniformToFill"
-                                                Visibility="Collapsed" />
-                                        </Grid>
-
-                                        <Grid
-                                            Margin="2,0"
-                                            HorizontalAlignment="Left"
-                                            VerticalAlignment="Center">
-                                            <Image
-                                                Width="40"
-                                                Height="40"
-                                                Source="https://api.suhri.de/user/picture/54/128.png" />
                                             <Path
                                                 Height="25"
                                                 Margin="0,0,0,-10"
@@ -665,20 +558,6 @@
                                     Height="4"
                                     Margin="0,1"
                                     Background="LightBlue"
-                                    CornerRadius="3"
-                                    Visibility="Collapsed" />
-                                <Border
-                                    Width="30"
-                                    Height="4"
-                                    Margin="0,1"
-                                    Background="LightCoral"
-                                    CornerRadius="3"
-                                    Visibility="Collapsed" />
-                                <Border
-                                    Width="30"
-                                    Height="4"
-                                    Margin="0,1"
-                                    Background="LightGreen"
                                     CornerRadius="3"
                                     Visibility="Collapsed" />
                             </StackPanel>

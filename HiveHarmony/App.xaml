@@ -7,12 +7,17 @@
     <Application.Resources>
 
         <ResourceDictionary>
+
+            <FontFamily x:Key="FlowCircularRegular">Fonts/#Flow Circular Regular</FontFamily>
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
                         <ResourceDictionary Source="Themes/DarkModeColors.xaml" />
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
+
+                <ResourceDictionary Source="Themes/Consts.xaml" />
 
                 <ResourceDictionary Source="Styles/HexButton.xaml" />
                 <ResourceDictionary Source="Styles/Checkbox.xaml" />
