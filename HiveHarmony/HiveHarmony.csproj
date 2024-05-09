@@ -9,7 +9,17 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <None Remove="Fonts\FlowCircular-Regular.ttf" />
+    </ItemGroup>
+
+    <ItemGroup>
       <PackageReference Include="HexGridControl" Version="1.1.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Resource Include="Fonts\FlowCircular-Regular.ttf">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
 
 </Project>

@@ -126,7 +126,7 @@
                     <ColumnDefinition Width="135px" />
                 </Grid.ColumnDefinitions>
 
-                <Rectangle Grid.ColumnSpan="2">
+                <Rectangle Grid.ColumnSpan="2" MouseDown="Rectangle_MouseDown">
                     <Rectangle.Fill>
                         <LinearGradientBrush>
                             <GradientStop Offset=".5" Color="Transparent" />
@@ -295,13 +295,18 @@
                             </TextBlock>
                         </Border>
 
-                        <StackPanel Margin="0,55,0,0">
+                        <StackPanel Name="GroupsPanel" Margin="0,55,0,0">
                             <Border
                                 Margin="10,5"
                                 Padding="10,20"
                                 Background="{DynamicResource scb_Back_Primary_HighMid}"
-                                CornerRadius="{StaticResource CornerRadius_Medium}">
+                                CornerRadius="{StaticResource CornerRadius_Medium}"
+                                Visibility="Collapsed">
                                 <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="163*" />
+                                        <ColumnDefinition Width="84*" />
+                                    </Grid.ColumnDefinitions>
                                     <CheckBox
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Center"
@@ -320,12 +325,8 @@
                                             Width="25"
                                             Height="25"
                                             Margin="1"
-                                            Source="https://api.suhri.de/user/picture/3/128.png" />
-                                        <Image
-                                            Width="25"
-                                            Height="25"
-                                            Margin="1"
-                                            Source="https://api.suhri.de/user/picture/10/128.png" />
+                                            Source="https://api.suhri.de/user/picture/3/128.png"
+                                            Visibility="Collapsed" />
                                     </WrapPanel>
                                 </Grid>
                             </Border>
@@ -363,6 +364,7 @@
 
 
                         <TextBlock
+                            Name="TodoListTextBlock"
                             Margin="10,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
@@ -533,7 +535,8 @@
                         Grid.Column="0"
                         Margin="2"
                         Background="{DynamicResource scb_Back_Primary_LowMid}"
-                        BorderThickness="0">
+                        BorderThickness="0"
+                        Visibility="Collapsed">
                         <hex:HexItem.Effect>
                             <DropShadowEffect
                                 BlurRadius="2"
