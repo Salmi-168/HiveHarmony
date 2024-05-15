@@ -7,6 +7,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Xml;
 using HexGridControl;
+using HiveHarmony.Styles.Themes;
 
 namespace HiveHarmony;
 
@@ -15,26 +16,21 @@ namespace HiveHarmony;
 /// </summary>
 public partial class MainWindow : Window
 {
-    enum windowThemes { dark, light }
-
-    windowThemes currentTheme = windowThemes.dark;
-
-
-    Random random = new Random();
-
+    private WindowThemes _currentTheme = WindowThemes.Dark;
 
     public MainWindow()
     {
         InitializeComponent();
     }
 
-
     #region Toolbar
+
     private void Rectangle_MouseDown(object sender, MouseButtonEventArgs e)
     {
         if (e.LeftButton == MouseButtonState.Pressed)
             DragMove();
     }
+
     private void CommandBindingCanExecute(object sender, CanExecuteRoutedEventArgs e) => e.CanExecute = true;
 
     private void CloseWindow(object sender, ExecutedRoutedEventArgs e) => SystemCommands.CloseWindow(this);
@@ -46,61 +42,66 @@ public partial class MainWindow : Window
         else
             SystemCommands.MaximizeWindow(this);
     }
+
     private void MinimizeWindow(object sender, ExecutedRoutedEventArgs e) => SystemCommands.MinimizeWindow(this);
+
     #endregion
 
 
     #region Debugging / Testing
+
     private void Window_KeyDown(object sender, KeyEventArgs e)
     {
-        if (e.Key == Key.T)
+        switch (e)
         {
-            currentTheme = currentTheme == windowThemes.dark ? windowThemes.light : windowThemes.dark;
-            string ressourceName = currentTheme == windowThemes.dark ? "DarkModeColors.xaml" : "LightModeColors.xaml";
-            ((App)Application.Current).ChangeDesign($"Themes/{ressourceName}");
-        }
-
-        if (e.Key == Key.P)
-        {
-            MessageBox.Show(Height + " x " + Width);
+            case { Key: Key.T }:
+            {
+                _currentTheme = _currentTheme == WindowThemes.Dark ? WindowThemes.Light : WindowThemes.Dark;
+                string resourceName =
+                    _currentTheme == WindowThemes.Dark ? "DarkModeColors.xaml" : "LightModeColors.xaml";
+                ((App)Application.Current).ChangeDesign($"Themes/{resourceName}");
+                break;
+            }
+            case { Key: Key.P }:
+                MessageBox.Show(Height + " x " + Width);
+                break;
         }
     }
+
     #endregion
 
     #region Window Functions
-    private void Window_Loaded(object sender, RoutedEventArgs e)
+
+    private async void Window_Loaded(object sender, RoutedEventArgs e)
     {
-        Load_Calendar();
+        await Load_Calendar();
         Load_TodoList();
         Load_Groups();
     }
+
     #endregion
 
     #region Extra Funxtions
-    private T FindParent<T>(DependencyObject child) where T : DependencyObject
+
+    private static T? FindParent<T>(DependencyObject child) where T : DependencyObject
     {
-        DependencyObject parentObject = VisualTreeHelper.GetParent(child);
+        DependencyObject? parentObject = VisualTreeHelper.GetParent(child);
 
-        // Wenn das Elternelement null ist, gibt es kein passendes Element
-        if (parentObject == null)
-            return null;
-
-        // Prüfe, ob das Elternelement den gewünschten Typ hat
-        if (parentObject is T parent)
+        return parentObject switch
         {
-            return parent;
-        }
-        else
-        {
-            // Rekursiv weiter nach oben im Baum suchen
-            return FindParent<T>(parentObject);
-        }
+            // Wenn das Elternelement null ist, gibt es kein passendes Element
+            null => null,
+            // Prüfe, ob das Elternelement den gewünschten Typ hat
+            T parent => parent,
+            _ => FindParent<T>(parentObject)
+        };
     }
+
     #endregion
 
     #region Loading Functions
 
-    private async void Load_Calendar()
+    private async Task Load_Calendar()
     {
         CalenderMonthTextBlock.Text = DateTime.Today.ToString("MMMM");
         WeekdayHeaderTextblock.Text = $"{DateTime.Today.DayOfWeek}\n{DateTime.Today:G}";
@@ -110,19 +111,17 @@ public partial class MainWindow : Window
         if (currentMonthStart.DayOfWeek != DayOfWeek.Monday)
             currentMonthStart = currentMonthStart.AddDays(-(int)currentMonthStart.DayOfWeek + 1);
 
-
-
         for (int y = 0; y < CalenderHexGrid.RowCount; y++)
         {
             for (int x = 0; x < CalenderHexGrid.ColumnCount; x++)
             {
-                string CalendarDayTemp = XamlWriter.Save(CalenderHexGrid.Children[0]);
-                StringReader stringReader = new(CalendarDayTemp);
+                string calendarDayTemp = XamlWriter.Save(CalenderHexGrid.Children[0]);
+                StringReader stringReader = new(calendarDayTemp);
                 XmlReader xmlReader = XmlReader.Create(stringReader);
                 HexItem newHexItem = (HexItem)XamlReader.Load(xmlReader);
 
                 TextBlock hexTextBlock = (TextBlock)((Grid)newHexItem.Content).Children[0];
-                StackPanel hexStackPanel_appointment = (StackPanel)((Grid)newHexItem.Content).Children[1];
+                StackPanel hexStackPanelAppointment = (StackPanel)((Grid)newHexItem.Content).Children[1];
 
                 if (y == 0)
                 {
@@ -146,9 +145,10 @@ public partial class MainWindow : Window
                         hexTextBlock.Opacity = 0.5;
 
                     // Check if something is planned on this day
-                    if (random.Next(100) < 33) // Just for testing
+                    if (Random.Shared.Next(100) < 33) // Just for testing
                     {
-                        Border borderTemplate = (Border)((StackPanel)((Grid)newHexItem.Content).Children[1]).Children[0];
+                        Border borderTemplate =
+                            (Border)((StackPanel)((Grid)newHexItem.Content).Children[1]).Children[0];
                         /* if more than one is needed this can be used to clone the bar
                         string gameButtonTemp = XamlWriter.Save(borderTemplate);
                         stringReader = new(gameButtonTemp);
@@ -157,12 +157,9 @@ public partial class MainWindow : Window
 
                         borderTemplate.Visibility = Visibility.Visible;
 
-                        borderTemplate.Background = random.Next(2) == 0 ? Brushes.LightBlue : Brushes.LightCoral;
-
+                        borderTemplate.Background = Random.Shared.Next(2) == 0 ? Brushes.LightBlue : Brushes.LightCoral;
                     }
-
                 }
-
 
                 Grid.SetColumn(newHexItem, x);
                 Grid.SetRow(newHexItem, y);
@@ -177,7 +174,6 @@ public partial class MainWindow : Window
 
                 if (x >= CalenderHexGrid.ColumnCount - 1 && currentMonthStart.Month != DateTime.Today.Month && y > 1)
                     y = CalenderHexGrid.RowCount;
-
             }
         }
     }
@@ -186,37 +182,40 @@ public partial class MainWindow : Window
     {
         // Load Todos from somewhere
         TodoListTextBlock.Text = "- Arbeit\n- Essen";
-        TodoListTextBlock.FontFamily = new FontFamily("Tahoma");
+        TodoListTextBlock.FontFamily = new("Tahoma");
     }
 
-    private void Load_Groups ()
+    private void Load_Groups()
     {
         // Load Data
-        string[] someData = { "Sport", "Sushi" };
+        string[] groups = ["Sport", "Sushi"];
 
-        for (int i = 0; i < someData.Length; i++)
+        foreach (string group in groups)
         {
-            string GroupTemp = XamlWriter.Save(GroupsPanel.Children[0]);
-            StringReader stringReader = new(GroupTemp);
+            string groupTemp = XamlWriter.Save(GroupsPanel.Children[0]);
+            StringReader stringReader = new(groupTemp);
             XmlReader xmlReader = XmlReader.Create(stringReader);
             Border newBorder = (Border)XamlReader.Load(xmlReader);
 
-            ((CheckBox)((Grid)newBorder.Child).Children[0]).Content = someData[i];
-            ((CheckBox)((Grid)newBorder.Child).Children[0]).FontFamily = new FontFamily("Tahoma");
+            ((CheckBox)((Grid)newBorder.Child).Children[0]).Content = group;
+            ((CheckBox)((Grid)newBorder.Child).Children[0]).FontFamily = new("Tahoma");
 
-            ((CheckBox)((Grid)newBorder.Child).Children[0]).IsChecked = random.Next(2) == 0;
+            ((CheckBox)((Grid)newBorder.Child).Children[0]).IsChecked = Random.Shared.Next(2) == 0;
 
             // Load People
-            string[] people = { "https://api.suhri.de/user/picture/3/128.png", "https://api.suhri.de/user/picture/1/128.png" }; // Just for testing
+            string[] people =
+            [
+                "https://api.suhri.de/user/picture/3/128.png", "https://api.suhri.de/user/picture/1/128.png"
+            ]; // Just for testing
 
-            for (int j = 0; j < people.Length; j++)
+            foreach (string p in people)
             {
-                string PersonTemp = XamlWriter.Save(((WrapPanel)((Grid)newBorder.Child).Children[1]).Children[0]);
-                stringReader = new(PersonTemp);
+                string personTemp = XamlWriter.Save(((WrapPanel)((Grid)newBorder.Child).Children[1]).Children[0]);
+                stringReader = new(personTemp);
                 xmlReader = XmlReader.Create(stringReader);
                 Image newImage = (Image)XamlReader.Load(xmlReader);
 
-                newImage.Source = new BitmapImage(new Uri(people[j]));
+                newImage.Source = new BitmapImage(new(p));
 
                 newImage.Visibility = Visibility.Visible;
                 ((WrapPanel)((Grid)newBorder.Child).Children[1]).Children.Add(newImage);
@@ -225,20 +224,17 @@ public partial class MainWindow : Window
             newBorder.Visibility = Visibility.Visible;
             GroupsPanel.Children.Add(newBorder);
         }
-
     }
 
     #endregion
 
     private void CalenderHex_Click(object sender, RoutedEventArgs e)
     {
-        HexItem hexItem = FindParent<HexItem>((Button)sender);
+        HexItem? hexItem = FindParent<HexItem>((Button)sender);
 
-        string data = hexItem.Tag.ToString() ?? "";
+        string data = hexItem?.Tag.ToString() ?? string.Empty;
 
         if (DateTime.TryParse(data, out DateTime val))
             WeekdayHeaderTextblock.Text = $"{val.DayOfWeek}\n{val:G}";
     }
-
-
 }
