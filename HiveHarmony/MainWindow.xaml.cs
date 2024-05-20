@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using HexGridControl;
+using HiveHarmony.Styles.Themes;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -6,8 +8,6 @@ using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Xml;
-using HexGridControl;
-using HiveHarmony.Styles.Themes;
 
 namespace HiveHarmony;
 
@@ -55,13 +55,13 @@ public partial class MainWindow : Window
         switch (e)
         {
             case { Key: Key.T }:
-            {
-                _currentTheme = _currentTheme == WindowThemes.Dark ? WindowThemes.Light : WindowThemes.Dark;
-                string resourceName =
-                    _currentTheme == WindowThemes.Dark ? "DarkModeColors.xaml" : "LightModeColors.xaml";
-                ((App)Application.Current).ChangeDesign($"Themes/{resourceName}");
-                break;
-            }
+                {
+                    _currentTheme = _currentTheme == WindowThemes.Dark ? WindowThemes.Light : WindowThemes.Dark;
+                    string resourceName =
+                        _currentTheme == WindowThemes.Dark ? "DarkModeColors.xaml" : "LightModeColors.xaml";
+                    ((App)Application.Current).ChangeDesign($"Themes/{resourceName}");
+                    break;
+                }
             case { Key: Key.P }:
                 MessageBox.Show(Height + " x " + Width);
                 break;
@@ -72,11 +72,12 @@ public partial class MainWindow : Window
 
     #region Window Functions
 
-    private async void Window_Loaded(object sender, RoutedEventArgs e)
+    private void Window_Loaded(object sender, RoutedEventArgs e)
     {
-        await Load_Calendar();
+        _ = Load_Calendar();
         Load_TodoList();
         Load_Groups();
+        Load_Appointments();
     }
 
     #endregion
@@ -121,7 +122,6 @@ public partial class MainWindow : Window
                 HexItem newHexItem = (HexItem)XamlReader.Load(xmlReader);
 
                 TextBlock hexTextBlock = (TextBlock)((Grid)newHexItem.Content).Children[0];
-                StackPanel hexStackPanelAppointment = (StackPanel)((Grid)newHexItem.Content).Children[1];
 
                 if (y == 0)
                 {
@@ -205,7 +205,7 @@ public partial class MainWindow : Window
             // Load People
             string[] people =
             [
-                "https://api.suhri.de/user/picture/3/128.png", "https://api.suhri.de/user/picture/1/128.png"
+                "https://api.suhri.de/user/picture/0/user.png", "https://api.suhri.de/user/picture/0/user.png"
             ]; // Just for testing
 
             foreach (string p in people)
@@ -223,6 +223,47 @@ public partial class MainWindow : Window
 
             newBorder.Visibility = Visibility.Visible;
             GroupsPanel.Children.Add(newBorder);
+        }
+    }
+
+    private void Load_Appointments()
+    {
+        // Load Data
+        string[] appointments = ["Arbeit", "Sport"];
+        string[] timeFrames = ["19 - 23", "16 - 18"];
+
+        for (int i = 0; i < appointments.Length; i++)
+        {
+            string AppointmentTemp = XamlWriter.Save(AppointmentsPanel.Children[0]);
+            StringReader stringReader = new(AppointmentTemp);
+            XmlReader xmlReader = XmlReader.Create(stringReader);
+            Border newBorder = (Border)XamlReader.Load(xmlReader);
+
+            ((TextBlock)((Grid)newBorder.Child).Children[0]).Text = appointments[i];
+            ((TextBlock)((Grid)newBorder.Child).Children[0]).FontFamily = new("Tahoma");
+
+            ((TextBlock)((Border)((Grid)newBorder.Child).Children[1]).Child).Text = timeFrames[i];
+            ((TextBlock)((Border)((Grid)newBorder.Child).Children[1]).Child).FontFamily = new("Tahoma");
+
+            // Load People
+            string[] people = ["https://api.suhri.de/user/picture/44/128.png", "https://api.suhri.de/user/picture/59/128.png"]; // Just for testing
+
+            for (int j = 0; j < people.Length; j++)
+            {
+                string PersonTemp = XamlWriter.Save(((StackPanel)((Grid)newBorder.Child).Children[2]).Children[0]);
+                stringReader = new(PersonTemp);
+                xmlReader = XmlReader.Create(stringReader);
+                Grid newGrid = (Grid)XamlReader.Load(xmlReader);
+
+                ((Image)newGrid.Children[0]).Source = new BitmapImage(new Uri(people[j]));
+                ((System.Windows.Shapes.Path)newGrid.Children[1]).Visibility = Random.Shared.Next(2) == 0 ? Visibility.Visible : Visibility.Collapsed;
+
+                newGrid.Visibility = Visibility.Visible;
+                ((StackPanel)((Grid)newBorder.Child).Children[2]).Children.Add(newGrid);
+            }
+
+            newBorder.Visibility = Visibility.Visible;
+            AppointmentsPanel.Children.Add(newBorder);
         }
     }
 

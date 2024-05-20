@@ -82,8 +82,8 @@
                             x:Name="contentPresenter"
                             Grid.Column="1"
                             Margin="{TemplateBinding Padding}"
-                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
                             Focusable="False"
                             RecognizesAccessKey="True"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
