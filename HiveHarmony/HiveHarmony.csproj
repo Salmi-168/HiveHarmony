@@ -22,4 +22,8 @@
       </Resource>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\HiveHarmony.Core\HiveHarmony.Core.csproj" />
+    </ItemGroup>
+
 </Project>
